@@ -1,37 +1,51 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
+import App from 'next/app'
+import { ThemeProvider } from 'styled-components'
+import Navigation from 'components/Navigation'
 
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
+const theme = {
+  colors: {
+    primary: '#91d8c9',
+    second: '#c991d8',
+    third: '#d8c991',
+    error: 'red'
   },
-  menuButton: {
-    marginRight: theme.spacing(2)
+  makeMagic ({ selector }) {
+    return `
+      ${selector} {
+          background: linear-gradient(270deg, #c991d8, #91d8c9);
+          background-size: 400% 400%;
+
+          -webkit-animation: Wizardy 30s ease infinite;
+          -moz-animation: Wizardy 30s ease infinite;
+          animation: Wizardy 30s ease infinite;
+      }
+
+      @-webkit-keyframes Wizardy {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+      @-moz-keyframes Wizardy {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+      @keyframes Wizardy {
+          0%{background-position:0% 50%}
+          50%{background-position:100% 50%}
+          100%{background-position:0% 50%}
+      }
+    `
   }
-}))
+}
 
 function DefaultLayout({ children }) {
-  const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color="inherit">
-            NotesWizard
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <ThemeProvider theme={theme}>
+      <Navigation />
       {children}
-    </div>
+    </ThemeProvider>
   )
 }
 
