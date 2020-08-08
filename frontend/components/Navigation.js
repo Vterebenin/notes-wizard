@@ -1,6 +1,4 @@
-import { capitalize } from 'helpers/useful'
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -25,11 +23,12 @@ const Title = styled(Typography)`
 const MenuButton = styled(IconButton)`
   margin-right: 5px;
 `
-const Signup = styled(Button)`
-  span {
-    color: ${({ theme }) => theme.colors.second};
-  }
-`
+// TODO: research for problems in dynamic names in styled components
+// const Signup = styled(Button)`
+//   span {
+//     color: ${({ theme }) => theme.colors.second};
+//   }
+// `
 
 const Signin = styled(Button)`
   span {
@@ -52,13 +51,13 @@ function Navigation () {
   ]
 
   return (
-    <AppBar position="static">
-      <Toolbar variant="dense">
-        <MenuButton edge="start" color="inherit" aria-label="menu">
+    <AppBar position='static'>
+      <Toolbar variant='dense'>
+        <MenuButton edge='start' color='inherit' aria-label='menu'>
           <MenuIcon />
         </MenuButton>
-        <Title variant="h6" color="inherit">
-          <Link href="/">
+        <Title variant='h6' color='inherit'>
+          <Link href='/'>
             <a>
               NotesWizard
             </a>

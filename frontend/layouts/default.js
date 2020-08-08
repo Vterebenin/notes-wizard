@@ -1,7 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles'
-import App from 'next/app'
+import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import Navigation from 'components/Navigation'
+import PropTypes from 'prop-types'
 
 const theme = {
   colors: {
@@ -40,13 +40,17 @@ const theme = {
   }
 }
 
-function DefaultLayout({ children }) {
+function DefaultLayout ({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <Navigation />
       {children}
     </ThemeProvider>
   )
+}
+
+DefaultLayout.propTypes = {
+  children: PropTypes.element
 }
 
 export default DefaultLayout

@@ -1,7 +1,9 @@
+import React from 'react'
 import '../styles/globals.css'
 import DefaultLayout from '../layouts/default.js'
+import PropTypes from 'prop-types'
 
-function MyApp({ Component, pageProps }) {
+function App ({ Component, pageProps }) {
   return (
     <DefaultLayout>
       <Component {...pageProps} />
@@ -9,4 +11,9 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+App.propTypes = {
+  Component: PropTypes.elementType,
+  pageProps: PropTypes.object
+}
+
+export default App
