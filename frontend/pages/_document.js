@@ -1,6 +1,8 @@
 import Document from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
+// Document was reassigned since styled component dictates the rules about it
+// however i would like to find another solution to this problem
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet()

@@ -1,3 +1,4 @@
+import { capitalize } from 'helpers/useful'
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -24,19 +25,32 @@ const Title = styled(Typography)`
 const MenuButton = styled(IconButton)`
   margin-right: 5px;
 `
-const SignUp = styled(Button)`
+const Signup = styled(Button)`
   span {
     color: ${({ theme }) => theme.colors.second};
   }
 `
 
-const SignIn = styled(Button)`
+const Signin = styled(Button)`
   span {
     color: ${({ theme }) => theme.colors.primary};
   }
 `
 
 function Navigation () {
+  const links = [
+    {
+      href: '/auth/signin',
+      text: 'Sign In',
+      tag: 'SignIn'
+    },
+    {
+      href: '/auth/signup',
+      text: 'Sign Up',
+      tag: 'SignUp'
+    }
+  ]
+
   return (
     <AppBar position="static">
       <Toolbar variant="dense">
@@ -50,12 +64,7 @@ function Navigation () {
             </a>
           </Link>
         </Title>
-        <SignIn href="/signin">
-          Sign In
-        </SignIn>
-        <SignUp href="/signup">
-          Sign Up
-        </SignUp>
+        {links.map((item, i) => <Signin key={i} href={item.href}>{item.text}</Signin>)}
       </Toolbar>
     </AppBar>
   )
