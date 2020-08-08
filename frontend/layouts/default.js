@@ -10,15 +10,31 @@ const theme = {
     third: '#d8c991',
     error: 'red'
   },
-  makeMagic ({ selector }) {
+  makeMagic (obj = {}) {
+    const { selector } = obj
+    // TODO: переписать условие с селектором
     return `
-      ${selector} {
-          background: linear-gradient(270deg, #c991d8, #91d8c9);
-          background-size: 400% 400%;
+      ${obj && selector
+        ? `${selector} {
+              color: #ffffff;
+              font-weight: bold;
+              background: linear-gradient(270deg, #c991d8, #91d8c9);
+              background-size: 400% 400%;
 
-          -webkit-animation: Wizardy 30s ease infinite;
-          -moz-animation: Wizardy 30s ease infinite;
-          animation: Wizardy 30s ease infinite;
+              -webkit-animation: Wizardy 30s ease infinite;
+              -moz-animation: Wizardy 30s ease infinite;
+              animation: Wizardy 30s ease infinite;
+          }`
+        : `background: linear-gradient(270deg, #c991d8, #91d8c9);
+           background-size: 400% 400%;
+
+           -webkit-animation: Wizardy 30s ease infinite;
+           -moz-animation: Wizardy 30s ease infinite;
+           animation: Wizardy 30s ease infinite;
+           span {
+             color: #ffffff;
+             font-weight: bold;
+           }`
       }
 
       @-webkit-keyframes Wizardy {
