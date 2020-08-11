@@ -40,7 +40,7 @@ function SignIn () {
 
   return (
     <StyledWrapper>
-      <h1>Sign up</h1>
+      <h1>Sign in</h1>
       <form onSubmit={handleSubmit} noValidate autoComplete='off'>
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -65,6 +65,7 @@ function SignIn () {
           </Grid>
         </Grid>
       </form>
+      {/* Todo: сделать выводы на дополнительные ссылки, авторизация через google acc */}
       <pre>
         {formData.email}
         {formData.password}
