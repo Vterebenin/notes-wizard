@@ -1,15 +1,21 @@
 const FETCH = 'FETCH'
+const CLEAR = 'CLEAR'
 
 const initialState = {
-  user: 'im a user, maybe'
+  user: null
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR:
+      return {
+        ...state,
+        user: null
+      }
     case FETCH:
       return {
         ...state,
-        user: 'im a fucking user, okay?'
+        user: action.payload
       }
     default:
       return state

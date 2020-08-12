@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, TextField, Grid } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import $axios from 'plugins/axios'
 
@@ -13,6 +14,8 @@ const StyledButton = styled(Button)`
 `
 
 function SignIn () {
+  const dispatch = useDispatch()
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -29,10 +32,11 @@ function SignIn () {
     e.preventDefault()
     const { email, password } = formData
     try {
-      const { data } = await $axios.plain.post('api/v1/signin', {
+      const { data: { csrf, user } } = await $axios.plain.post('api/v1/signin', {
         email, password
       })
-      console.log(data)
+      window.localStorage.csrf = csrf
+      dispatch({ type: 'FETCH', payload: user })
     } catch (e) {
       console.error(e)
     }

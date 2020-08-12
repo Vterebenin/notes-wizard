@@ -1,4 +1,4 @@
-class Api::V1::RefreshController < ApiWrapper
+class Api::V1::RefreshController < ApplicationController
   before_action :authorize_refresh_by_access_request!
 
   def create
@@ -11,5 +11,10 @@ class Api::V1::RefreshController < ApiWrapper
                         httponly: true,
                         secure: Rails.env.production?)
     render json: { csrf: tokens[:csrf] }
+  end
+
+  def get_user
+    render json: { user: current_user }
+    return 
   end
 end

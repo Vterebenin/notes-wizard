@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Button from '@material-ui/core/Button'
+import { useSelector, useDispatch } from 'react-redux'
 import { useAuth } from 'helpers/hooks'
 import Link from 'next/link'
 import styled from 'styled-components'
@@ -38,20 +39,27 @@ const Signin = styled(Button)`
 `
 
 function Navigation () {
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.auth.user)
+  useAuth(user, dispatch)
+
   const links = [
+    {
+      href: '/auth/logout',
+      text: 'Log Out',
+      shouldRender: user
+    },
     {
       href: '/auth/signin',
       text: 'Sign In',
-      tag: 'SignIn'
+      shouldRender: !user
     },
     {
       href: '/auth/signup',
       text: 'Sign Up',
-      tag: 'SignUp'
+      shouldRender: !user
     }
   ]
-  const user = useAuth()
-  console.log(user)
 
   return (
     <AppBar position='static'>
@@ -66,7 +74,8 @@ function Navigation () {
             </a>
           </Link>
         </Title>
-        {links.map((item, i) => <Signin key={i} href={item.href}>{item.text}</Signin>)}
+        <div>{user && user.email}</div>
+        {links.map((item, i) => item.shouldRender && <Signin key={i} href={item.href}>{item.text}</Signin>)}
       </Toolbar>
     </AppBar>
   )

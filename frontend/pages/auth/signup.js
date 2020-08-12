@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, TextField, Grid } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import $axios from 'plugins/axios'
 
@@ -13,6 +14,8 @@ const StyledButton = styled(Button)`
 `
 
 function SignUp () {
+  const dispatch = useDispatch()
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -30,18 +33,12 @@ function SignUp () {
     e.preventDefault()
     const { email, password, passwordConfirmation } = formData
     try {
-      const { data } = await $axios.plain.post('api/v1/signup', {
+      const { data: { csrf, user } } = await $axios.plain.post('api/v1/signup', {
         email, password, password_confirmation: passwordConfirmation
       })
-      console.log(data)
-      // if (!response.data.csrf) {
-      //   this.signupFailed(response)
-      //   return
-      // }
-      // localStorage.csrf = response.data.csrf
-      // localStorage.signedIn = true
-      // this.error = ''
-      // this.$router.replace('/records')
+      console.log(csrf, user)
+      window.localStorage.csrf = csrf
+      dispatch({ type: 'FETCH', payload: user })
     } catch (e) {
       console.error(e)
     }
