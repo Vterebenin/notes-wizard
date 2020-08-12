@@ -11,9 +11,7 @@ class Api::V1::SigninController < ApplicationController
                         value: tokens[:access],
                         httponly: true,
                         secure: Rails.env.production?)
-      puts current_user
-      puts 'test 123'
-      render json: { csrf: tokens[:csrf], user: current_user }
+      render json: { csrf: tokens[:csrf], user: user }
     else
       not_authorized
     end

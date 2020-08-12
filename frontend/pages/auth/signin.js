@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, TextField, Grid } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import $axios from 'plugins/axios'
 
@@ -14,6 +15,7 @@ const StyledButton = styled(Button)`
 `
 
 function SignIn () {
+  const router = useRouter()
   const dispatch = useDispatch()
 
   const [formData, setFormData] = useState({
@@ -37,6 +39,7 @@ function SignIn () {
       })
       window.localStorage.csrf = csrf
       dispatch({ type: 'FETCH', payload: user })
+      router.push('/')
     } catch (e) {
       console.error(e)
     }

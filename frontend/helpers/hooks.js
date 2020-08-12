@@ -18,5 +18,5 @@ export const useAuth = (user, dispatch) => {
       }
       getUser()
     }
-  })
+  }, [user])
 }

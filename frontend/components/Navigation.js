@@ -7,8 +7,10 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Button from '@material-ui/core/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import { useAuth } from 'helpers/hooks'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styled from 'styled-components'
+import $axios from 'plugins/axios'
 
 const Title = styled(Typography)`
   flex-grow: 1;
@@ -40,12 +42,20 @@ const Signin = styled(Button)`
 
 function Navigation () {
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.auth.user)
+  const router = useRouter()
+  let user = useSelector((state) => state.auth.user)
   useAuth(user, dispatch)
 
   const links = [
     {
       href: '/auth/logout',
+      handler: async () => {
+        await $axios.secured.delete('/api/v1/signin')
+        window.localStorage.removeItem('csrf')
+        await dispatch({ type: 'LOGOUT' })
+        user = null
+        router.push('/')
+      },
       text: 'Log Out',
       shouldRender: user
     },
@@ -75,7 +85,7 @@ function Navigation () {
           </Link>
         </Title>
         <div>{user && user.email}</div>
-        {links.map((item, i) => item.shouldRender && <Signin key={i} href={item.href}>{item.text}</Signin>)}
+        {links.map(({ shouldRender, href, text, handler }, i) => shouldRender && <Signin key={i} href={href} onClick={handler}>{text}</Signin>)}
       </Toolbar>
     </AppBar>
   )

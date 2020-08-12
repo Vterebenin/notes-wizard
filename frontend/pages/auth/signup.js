@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, TextField, Grid } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import $axios from 'plugins/axios'
 
@@ -15,6 +16,7 @@ const StyledButton = styled(Button)`
 
 function SignUp () {
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     email: '',
@@ -36,9 +38,9 @@ function SignUp () {
       const { data: { csrf, user } } = await $axios.plain.post('api/v1/signup', {
         email, password, password_confirmation: passwordConfirmation
       })
-      console.log(csrf, user)
       window.localStorage.csrf = csrf
       dispatch({ type: 'FETCH', payload: user })
+      router.push('/')
     } catch (e) {
       console.error(e)
     }
