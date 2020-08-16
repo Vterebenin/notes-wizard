@@ -1,0 +1,11 @@
+.title {
+  flex-grow: 1
+}
+
+.signIn {
+  color: '#ffffff'
+}
+
+.menuButton {
+  margin-right: 5px
+}

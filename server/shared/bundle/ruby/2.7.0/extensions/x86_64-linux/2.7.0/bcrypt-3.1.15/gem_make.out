@@ -1,0 +1,19 @@
+current directory: /home/webadmin/notes-wizard/server/shared/bundle/ruby/2.7.0/gems/bcrypt-3.1.15/ext/mri
+/home/webadmin/.rbenv/versions/2.7.1/bin/ruby -I /home/webadmin/.rbenv/versions/2.7.1/lib/ruby/2.7.0 -r ./siteconf20200816-59673-1nd6njp.rb extconf.rb
+creating Makefile
+
+current directory: /home/webadmin/notes-wizard/server/shared/bundle/ruby/2.7.0/gems/bcrypt-3.1.15/ext/mri
+make "DESTDIR=" clean
+
+current directory: /home/webadmin/notes-wizard/server/shared/bundle/ruby/2.7.0/gems/bcrypt-3.1.15/ext/mri
+make "DESTDIR="
+compiling bcrypt_ext.c
+compiling crypt_blowfish.c
+gcc  -D__SKIP_GNU -I/home/webadmin/.rbenv/versions/2.7.1/include     -c -o x86.o x86.S
+compiling crypt_gensalt.c
+compiling wrapper.c
+linking shared-object bcrypt_ext.so
+
+current directory: /home/webadmin/notes-wizard/server/shared/bundle/ruby/2.7.0/gems/bcrypt-3.1.15/ext/mri
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20200816-59673-1mcine7
